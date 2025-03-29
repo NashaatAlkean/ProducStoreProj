@@ -1,14 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
+import productRoute from "./routes/product.route.js";
 
 dotenv.config();
 
 const app = express();
 
-app.get("/products", (req, res) => {});
+app.use(express.json()); //allows us to accept JSON data in the req.body
 
-console.log(process.env.MONGO_URI);
+app.use("/api/products", productRoute);
 
 app.listen(5000, () => {
   connectDB();
